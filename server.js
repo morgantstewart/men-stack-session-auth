@@ -7,6 +7,11 @@ const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const morgan = require("morgan");
 
+const authController = require('./controllers/auth.js');
+const router = require("./controllers/auth.js");
+
+
+
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : "3000";
 
@@ -25,14 +30,20 @@ app.use(morgan('dev'));
 
 
 
-// GET /
+
+app.use('auth', authController);
+
+
 app.get("/", async (req, res) => {
-  res.render("hello, friend!");
-  app.use("/auth", authController);
+  res.render("index.ejs");
 });
 
 
-const authController = require("./controllers/auth.js");
+// GET /
+app.get("/", async (req, res) => {
+  res.render("hello, friend!");
+});
+
 
 router.get("/sign-up", (req, res) => {
   res.render("auth/sign-up.ejs");

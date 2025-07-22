@@ -8,4 +8,3 @@ router.get("/sign-up", (req, res) => {
   res.render("auth/sign-up.ejs");
 });
 
-
