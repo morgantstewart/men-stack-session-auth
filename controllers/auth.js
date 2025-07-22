@@ -57,7 +57,13 @@ router.post("/sign-in", async (req, res) => {
         return res.send("Login failed. Please try again.");
     }
 
-    res.send("Request to sign in received!");
+
+req.session.user = {
+    username: userInDatabase.username,
+    _id: userInDatabase._id
+}
+
+    res.redirect("/");
 });
 
 
