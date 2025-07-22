@@ -8,7 +8,7 @@ const methodOverride = require("method-override");
 const morgan = require("morgan");
 
 const authController = require('./controllers/auth.js');
-const router = require("./controllers/auth.js");
+
 
 
 
@@ -31,7 +31,6 @@ app.use(morgan('dev'));
 
 
 
-app.use('auth', authController);
 
 
 app.get("/", async (req, res) => {
@@ -39,19 +38,13 @@ app.get("/", async (req, res) => {
 });
 
 
-// GET /
-app.get("/", async (req, res) => {
-  res.render("hello, friend!");
-});
+// // GET /
+// app.get("/", async (req, res) => {
+//   res.render("hello, friend!");
+// });
 
 
-router.get("/sign-up", (req, res) => {
-  res.render("auth/sign-up.ejs");
-});
-
-
-
-
+app.use('/auth', authController);
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
